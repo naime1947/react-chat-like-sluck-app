@@ -5,10 +5,8 @@ import Register from './Auth/Register'
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       hello from App
-      <Login/>
-      <Register/>
     </div>
   );
 }
