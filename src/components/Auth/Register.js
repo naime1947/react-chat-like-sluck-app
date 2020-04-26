@@ -25,10 +25,14 @@ class Register extends Component {
         </Header>
         <Form size="large" >
           <Segment stacked >
-            <Form.Input fluid type="text" onChange="this.handleChange" name="username" placeholder="User Name" icon="user" iconPosition="left"/>
-            <Form.Input fluid type="email" onChange="this.handleChange" name="email" placeholder="Email" icon="mail" iconPosition="left"/>
+            <Form.Input fluid type="text" onChange={this.handleChange} name="username" placeholder="User Name" icon="user" iconPosition="left"/>
+            <Form.Input fluid type="email" onChange={this.handleChange} name="email" placeholder="Email" icon="mail" iconPosition="left"/>
+            <Form.Input fluid type="password" onChange={this.handleChange} name="password" placeholder="Password" icon="lock" iconPosition="left"/>
+            <Form.Input fluid type="password" onChange={this.handleChange} name="passwordConfirmation" placeholder="Confirm Password" icon="repeat" iconPosition="left"/>
           </Segment>
+          <Button size="large" color="orange" fluid >Submit</Button>
         </Form>
+        <Message>Already a user? <Link to="/login" >Login</Link> </Message>
       </Grid.Column>
     </Grid>    
     );
