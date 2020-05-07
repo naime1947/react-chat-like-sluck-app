@@ -8,9 +8,10 @@ import "semantic-ui-css/semantic.min.css";
 import firebase from "./firebase";
 import { BrowserRouter as Router, Switch, Route, withRouter } from "react-router-dom";
 import {createStore} from 'redux';
-import {Provider} from 'react-redux';
+import {Provider, connect} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import rootReducier from './reducers/index';
+import {setUser} from './actions'
 
 
 
@@ -21,7 +22,9 @@ class Root extends React.Component {
 
   componentDidMount(){
     firebase.auth().onAuthStateChanged(user => {
-        this.props.history.push("/");
+      this.props.setUser(user);
+      this.props.history.push("/");
+      console.log(user);
     });
   }
 
@@ -36,7 +39,7 @@ class Root extends React.Component {
   }
 }
 
-const RouteWithAuth = withRouter(Root);
+const RouteWithAuth = withRouter( connect(null, {setUser})(Root));
 
 ReactDOM.render(
   <Provider store = {store}>
