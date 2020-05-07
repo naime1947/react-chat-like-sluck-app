@@ -6,8 +6,16 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import "semantic-ui-css/semantic.min.css";
 import firebase from "./firebase";
-
 import { BrowserRouter as Router, Switch, Route, withRouter } from "react-router-dom";
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import rootReducier from './reducers/index';
+
+
+
+const store = createStore(rootReducier, composeWithDevTools());
+
 
 class Root extends React.Component {
 
@@ -31,9 +39,11 @@ class Root extends React.Component {
 const RouteWithAuth = withRouter(Root);
 
 ReactDOM.render(
+  <Provider store = {store}>
   <Router>
     <RouteWithAuth/>
-  </Router>,
+  </Router>
+  </Provider>,
   document.getElementById("root")
 );
 serviceWorker.unregister();
