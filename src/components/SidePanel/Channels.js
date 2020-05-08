@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux'
 import firebase from "../../firebase";
+import {setCurrentChannel} from '../../actions'
 import { Menu, Icon, Modal, Form, Input, Button } from "semantic-ui-react";
 
 class Channels extends Component {
@@ -11,6 +13,20 @@ class Channels extends Component {
     modal: false,
     channelRef: firebase.database().ref("chennels"),
   };
+  componentDidMount(){
+      this.addListener();
+  }
+  addListener = ()=>{
+      const loadedChannels = [];
+      this.state.channelRef.on('child_added', snap=>{
+          loadedChannels.push(snap.val());
+          this.setState({channels: loadedChannels});
+      })
+  }
+  setCurrentChannel = (channel)=>{
+    this.props.setCurrentChannel(channel);
+  }
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -55,6 +71,19 @@ class Channels extends Component {
       })
   };
 
+  displayChannels = channels => (
+      channels.length && channels.map(channel=>(
+          <Menu.Item
+            key={channel.id}
+            name={channel.name}
+            onClick={()=> this.setCurrentChannel(channel)}
+            style = {{opacity:0.7}}
+          >
+              # {channel.name}
+          </Menu.Item>
+      ))
+  )
+
   render() {
     const { channels, modal } = this.state;
     return (
@@ -71,6 +100,7 @@ class Channels extends Component {
               name="add"
             />
           </Menu.Item>
+          {this.displayChannels(channels)}
         </Menu.Menu>
 
         <Modal size="tiny" basic open={modal} onClose={this.closeModal}>
@@ -109,4 +139,4 @@ class Channels extends Component {
     );
   }
 }
-export default Channels;
+export default connect(null,{setCurrentChannel})(Channels);
