@@ -10,8 +10,8 @@ class App extends Component {
   render() {
     return (
       <Grid className="app" columns="equal" style={{background:'#eee'}}>
-        <ColorPanel/>
         <SidePanel/>
+        <ColorPanel/>
         <Grid.Column style={{background: '#000', marginLeft: 320}}>
           <Messages />
         </Grid.Column>
