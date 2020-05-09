@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { Sidebar, Menu, Divider, Button } from "semantic-ui-react";
 
 class ColorPanel extends Component {
-    render() {
-        return (
-            <div style={{background:'red', height:'100%'}}>
-                ColorPanel
-            </div>
-        )
-    }
+  render() {
+    return (
+      <Sidebar as={Menu} inverted vertical visible width="very thin">
+          <Divider/>
+          <Button icon="add" size="small" color="blue"/>
+      </Sidebar>
+    );
+  }
 }
 
 export default ColorPanel;
