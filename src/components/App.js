@@ -10,7 +10,6 @@ import { Grid } from "semantic-ui-react";
 class App extends Component {
   render() {
     const { currentChannel, currentUser } = this.props;
-    console.log(this.props.currentChannel);   
     return (
       <Grid className="app" columns="equal" style={{ background: "#eee" }}>
         <ColorPanel />

@@ -21,3 +21,8 @@ body,
   margin-left: 320px !important;
   z-index: 200;
 }
+
+.message__self{
+  border-left: 1px solid orange;
+  padding-left: 8px;
+}
