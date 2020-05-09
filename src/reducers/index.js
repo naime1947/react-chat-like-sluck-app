@@ -36,7 +36,7 @@ const channel_reducer = (state = initialChannelState, action) => {
     case actionTypes.SET_CURRENT_CHANNEL:
       return {
         ...state,
-        channel: action.payLoad.currentChannel
+        currentChannel: action.payLoad.currentChannel
       };
     default:
       return state;
