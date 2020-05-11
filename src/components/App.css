@@ -26,3 +26,11 @@ body,
   border-left: 1px solid orange;
   padding-left: 8px;
 }
+.message__image{
+  padding:1em;
+}
+
+/* progressbar.js */
+.progress__bar{
+  margin-top: 0.3em;
+}
