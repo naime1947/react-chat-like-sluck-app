@@ -6,6 +6,9 @@ body,
   padding: 1em;
 }
 
+.menu{
+  padding-bottom: 2em;
+}
 
 /* Messages.js */
 .messages {
