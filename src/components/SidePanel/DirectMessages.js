@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import firebase from "../../firebase";
 import { Menu, Icon } from "semantic-ui-react";
+import {connect} from 'react-redux';
+import {setCurrentChannel, setPrivateChannel} from '../../actions'
 
 class DirectMessages extends Component {
   state = {
+    activeChannelId: '',
     users: [],
     currentUser: this.props.currentUser,
     usersRef: firebase.database().ref("users"),
@@ -60,7 +63,7 @@ class DirectMessages extends Component {
       if (userId !== user.uid) {
         user["status"] = `${connected ? "online" : "offline"}`;
       }
-      return acc.connect(user);
+      return acc.concat(user);
     }, []);
 
     this.setState({ users: updatedUsers });
@@ -69,9 +72,26 @@ class DirectMessages extends Component {
   isUserOnline = (user) => {
     return user.status === "online";
   };
+  changeChannel = user=>{
+    const channelId = this.getChannelId(user.uid);
+    const channelData ={
+      id:channelId,
+      name:user.name
+    }
+    this.props.setCurrentChannel(channelData);
+    this.props.setPrivateChannel(true);
+    this.setActiveChannel(user.uid);
+  }
+  setActiveChannel = userUID =>{
+    this.setState({activeChannelId: userUID});
+  }
+  getChannelId = userId=>{
+    const currentUserId = this.state.currentUser.uid;
+    return userId<currentUserId ? `${userId}/${currentUserId}` : `${currentUserId}/${userId}`
+  }
 
   render() {
-    const { users } = this.state;
+    const { users, activeChannelId } = this.state;
     return (
       <Menu.Menu className="menu">
         <Menu.Item>
@@ -84,8 +104,9 @@ class DirectMessages extends Component {
         {users.map((user) => (
           <Menu.Item
             key={user.uid}
-            onClick={() => console.log(user)}
+            onClick={() => this.changeChannel(user)}
             style={{ opacity: 0.7, fontStyle: "italic" }}
+            active = {user.uid === activeChannelId}
           >
             <Icon
               name="circle"
@@ -98,4 +119,4 @@ class DirectMessages extends Component {
     );
   }
 }
-export default DirectMessages;
+export default connect(null, {setCurrentChannel, setPrivateChannel})(DirectMessages);

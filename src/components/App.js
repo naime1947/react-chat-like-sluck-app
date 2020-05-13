@@ -9,7 +9,7 @@ import { Grid } from "semantic-ui-react";
 
 class App extends Component {
   render() {
-    const { currentChannel, currentUser } = this.props;
+    const { currentChannel, currentUser, isPrivateChannel } = this.props;
     return (
       <Grid className="app" columns="equal" style={{ background: "#eee" }}>
         <ColorPanel />
@@ -22,6 +22,7 @@ class App extends Component {
             key={currentChannel && currentChannel.id}
             currentChannel={currentChannel}
             currentUser = {currentUser}
+            isPrivateChannel = {isPrivateChannel}
           />
         </Grid.Column>
         <Grid.Column width="4">
@@ -34,6 +35,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
-  currentChannel: state.channel.currentChannel
+  currentChannel: state.channel.currentChannel,
+  isPrivateChannel: state.channel.isPrivatechannel
 });
 export default connect(mapStateToProps)(App);

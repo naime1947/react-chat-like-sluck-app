@@ -23,3 +23,13 @@ export const setCurrentChannel = channel=>{
         }
     }
 }
+
+
+export const setPrivateChannel = isPrivatechannel =>{
+    return {
+        type: actionTypes.SET_PRIVATE_CHANNEL, 
+        payLoad: {
+            isPrivatechannel: isPrivatechannel
+        }
+    }
+}
