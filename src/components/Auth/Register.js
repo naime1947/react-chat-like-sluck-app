@@ -6,8 +6,7 @@ import {
   Button,
   Header,
   Message,
-  Icon,
-  Input,
+  Icon
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import firebase from "../../firebase";

@@ -17,7 +17,9 @@ class SidePanel extends Component {
       >
         <UserPanel currentUser={this.props.currentUser} />
         <Channels currentUser={this.props.currentUser} />
-        <DirectMessages/>
+        <DirectMessages
+          currentUser={this.props.currentUser}
+        />
       </Menu>
     );
   }

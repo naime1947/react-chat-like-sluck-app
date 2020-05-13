@@ -1,6 +1,5 @@
 import React from "react";
 import { Comment, Image } from "semantic-ui-react";
-import { mockComponent } from "react-dom/test-utils";
 import moment from "moment";
 
 const isOwnMessage = (message, user) => {
